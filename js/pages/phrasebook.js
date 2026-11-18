@@ -1,7 +1,7 @@
 import { initPage, getDestination, toast, escapeHtml, COUNTRY } from "../lib/app.js";
 import { icon } from "../lib/icons.js";
 import { PHRASES, PHRASE_GROUPS } from "../data/phrases.js";
-import { speak, canSpeak } from "../lib/speech.js";
+import { speak } from "../lib/speech.js";
 import { load, save } from "../lib/store.js";
 
 initPage("phrasebook");
@@ -74,12 +74,15 @@ tabs.addEventListener("click", (event) => {
 });
 search.addEventListener("input", render);
 
-function say(text, lang) {
-  if (lang === "mn" && !canSpeak("mn")) {
-    toast("Your device has no Mongolian voice — follow the romanization instead.");
-    return;
-  }
-  if (!speak(text, lang)) toast("Sorry, your browser can't play audio for this.");
+const NO_VOICE = {
+  ko: "No Korean voice on this device. Open the site in Chrome or Edge, or add Korean in Windows Settings → Time & language → Speech.",
+  mn: "Your device has no Mongolian voice — follow the pronunciation under the phrase instead.",
+};
+
+async function say(text, lang) {
+  const result = await speak(text, lang);
+  if (result === "no-voice") toast(NO_VOICE[lang], 6000);
+  if (result === "unsupported") toast("Sorry, this browser can't read text out loud.");
 }
 
 async function copyText(text) {

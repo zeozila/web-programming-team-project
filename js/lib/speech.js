@@ -1,32 +1,60 @@
 // Read phrases out loud with the browser's built-in voices (Web Speech API).
-// Most devices have a Korean voice. Mongolian voices are rare, so we check first.
+// The browser can only use voices installed on the device (Chrome and Edge also add
+// online voices). If there's no Korean or Mongolian voice, we say so instead of
+// staying silent.
 
+const supported = "speechSynthesis" in window;
 let voices = [];
 
 function refreshVoices() {
-  if ("speechSynthesis" in window) voices = window.speechSynthesis.getVoices();
+  voices = window.speechSynthesis.getVoices();
 }
 
-if ("speechSynthesis" in window) {
+// Voices load in the background, so wait for them (at most 2 seconds)
+const voicesReady = new Promise((resolve) => {
+  if (!supported) return resolve();
   refreshVoices();
-  window.speechSynthesis.addEventListener?.("voiceschanged", refreshVoices);
+  if (voices.length) return resolve();
+  window.speechSynthesis.addEventListener("voiceschanged", () => {
+    refreshVoices();
+    resolve();
+  });
+  setTimeout(() => {
+    refreshVoices();
+    resolve();
+  }, 2000);
+});
+
+function findVoice(lang) {
+  const matches = voices.filter((voice) => voice.lang.toLowerCase().replace("_", "-").startsWith(lang));
+  // prefer the more natural online voices when there are several
+  return matches.find((voice) => !voice.localService) || matches[0];
 }
 
-export function canSpeak(lang) {
-  if (!("speechSynthesis" in window)) return false;
-  if (lang === "ko") return true; // let the browser pick; Korean is almost always there
-  return voices.some((voice) => voice.lang.toLowerCase().startsWith(lang));
-}
+let current = null; // keep a reference, otherwise Chrome can drop the sentence
 
-export function speak(text, lang) {
-  if (!("speechSynthesis" in window)) return false;
-  const code = lang === "ko" ? "ko-KR" : "mn-MN";
-  const utterance = new SpeechSynthesisUtterance(text.replace(/…/g, ""));
-  utterance.lang = code;
-  utterance.rate = 0.85;
-  const voice = voices.find((v) => v.lang.toLowerCase().startsWith(lang));
-  if (voice) utterance.voice = voice;
-  window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(utterance);
-  return true;
+/**
+ * Speak a phrase. Returns "ok", "no-voice" (nothing installed for that language)
+ * or "unsupported" (the browser has no speech at all).
+ */
+export async function speak(text, lang) {
+  if (!supported) return "unsupported";
+  await voicesReady;
+  const voice = findVoice(lang);
+  if (!voice) return "no-voice";
+
+  const synth = window.speechSynthesis;
+  if (synth.speaking || synth.pending) synth.cancel();
+
+  current = new SpeechSynthesisUtterance(text.replace(/…/g, "").trim());
+  current.voice = voice;
+  current.lang = voice.lang;
+  current.rate = 0.85;
+
+  // speaking right after cancel() is sometimes ignored in Chrome, so wait a moment
+  setTimeout(() => {
+    synth.resume();
+    synth.speak(current);
+  }, 80);
+  return "ok";
 }

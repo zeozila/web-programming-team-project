@@ -177,7 +177,7 @@ function setupHeader(header) {
 // ----- toast messages -----
 
 let toastTimer;
-export function toast(message) {
+export function toast(message, duration = 2600) {
   let box = document.querySelector(".toast");
   if (!box) {
     box = document.createElement("div");
@@ -189,7 +189,7 @@ export function toast(message) {
   box.textContent = message;
   box.classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => box.classList.remove("show"), 2600);
+  toastTimer = setTimeout(() => box.classList.remove("show"), duration);
 }
 
 // ----- small helpers used by several pages -----
