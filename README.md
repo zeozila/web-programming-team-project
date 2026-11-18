@@ -80,3 +80,5 @@ Then open http://localhost:8000. In VS Code the *Live Server* extension also wor
 - Map data and tiles © OpenStreetMap contributors
 - Weather: Open-Meteo.com (CC BY 4.0) · Exchange rates: ExchangeRate-API
 - Icons: [Lucide](https://lucide.dev) (ISC) · Fonts: Onest, Archivo, Caveat (SIL OFL)
+
+.
