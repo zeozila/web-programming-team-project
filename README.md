@@ -34,7 +34,7 @@ The name mixes *Seoul* and *Ulaanbaatar* ("baatar" means hero in Mongolian).
 
 - HTML5, CSS3 (Grid, Flexbox, custom properties, `<dialog>`)
 - Vanilla JavaScript (ES modules, `fetch`, `localStorage`)
-- [Leaflet](https://leafletjs.com/) with OpenStreetMap / CARTO map tiles
+- [Leaflet](https://leafletjs.com/) with OpenStreetMap map tiles
 - [Open-Meteo](https://open-meteo.com/) weather API and [ExchangeRate-API](https://www.exchangerate-api.com/) open endpoint (no API keys needed)
 - Hosted on GitHub Pages
 
@@ -77,6 +77,6 @@ Then open http://localhost:8000. In VS Code the *Live Server* extension also wor
 ## Credits
 
 - Photos: Wikimedia Commons contributors — every photo, author and licence is listed on the [About page](about.html#credits)
-- Map data © OpenStreetMap contributors, tiles by CARTO
+- Map data and tiles © OpenStreetMap contributors
 - Weather: Open-Meteo.com (CC BY 4.0) · Exchange rates: ExchangeRate-API
 - Icons: [Lucide](https://lucide.dev) (ISC) · Fonts: Onest, Archivo, Caveat (SIL OFL)
