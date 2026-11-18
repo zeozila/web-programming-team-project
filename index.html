@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SeoulBaatar — Korea ⇄ Mongolia travel guide</title>
+  <meta name="description" content="A two-way travel guide for Korea and Mongolia: places, map, phrasebook, live exchange rates, weather and a culture quiz.">
+  <meta name="theme-color" content="#16181d">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/theme-init.js"></script>
+  <script type="module" src="js/pages/home.js"></script>
+</head>
+<body class="has-hero">
+  <header class="site-header" id="site-header"></header>
+
+  <main id="main">
+    <!-- Hero with a photo slideshow that changes with the destination -->
+    <section class="hero" aria-label="Welcome">
+      <div class="hero-slides" id="hero-slides"></div>
+      <div class="container hero-content">
+        <p class="hero-hello" id="hero-hello">Сайн байна уу!</p>
+        <h1 class="hero-title" id="hero-title">Land of the <em>eternal blue sky</em></h1>
+        <p class="hero-text" id="hero-text">Gers under the stars, singing sand dunes and the friendliest nomads you'll ever meet — only three and a half hours from Seoul.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="explore.html" id="hero-explore">Explore places</a>
+          <a class="btn btn-ghost" href="planner.html">Plan my trip</a>
+        </div>
+      </div>
+      <div class="container hero-bottom">
+        <p class="hero-credit" id="hero-credit"></p>
+        <div class="hero-dots" id="hero-dots" role="group" aria-label="Choose photo"></div>
+      </div>
+    </section>
+
+    <!-- Live info -->
+    <section class="live-strip" aria-label="Live travel info">
+      <div class="container">
+        <div class="live-grid">
+          <div class="live-item">
+            <span class="ic" data-icon="clock"></span>
+            <div><small>Seoul time</small><strong id="time-seoul">--:--</strong></div>
+          </div>
+          <div class="live-item">
+            <span class="ic" data-icon="clock"></span>
+            <div><small>Ulaanbaatar time</small><strong id="time-ub">--:--</strong></div>
+          </div>
+          <div class="live-item">
+            <span class="ic" data-icon="banknote"></span>
+            <div><small id="rate-label">₩10,000 in tögrög</small><strong id="rate-value">…</strong></div>
+          </div>
+          <div class="live-item">
+            <span class="ic" data-icon="plane"></span>
+            <div><small>Incheon ⇄ Ulaanbaatar</small><strong>~3 h 30 min</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Choose a direction -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="kicker">Two countries, one guide</span>
+            <h2>Where are you heading?</h2>
+            <p>Pick a direction and the whole site — places, phrases, money and weather — switches to that country.</p>
+          </div>
+        </div>
+        <div class="choose-grid">
+          <a class="choose-card mongolia reveal" href="explore.html?country=mongolia" data-choose="mongolia">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Khongoryn_Els_04.jpg/960px-Khongoryn_Els_04.jpg" alt="Sand dunes of Khongoryn Els in the Gobi" loading="lazy">
+            <span class="inner">
+              <span class="for">for Koreans &amp; everyone else</span>
+              <h3>Visit Mongolia</h3>
+              <p>Wide-open steppe, the Gobi desert, Lake Khövsgöl and Naadam — plus how to order buuz and say thank you.</p>
+              <span class="go">Show me Mongolia <span data-icon="arrow-right"></span></span>
+            </span>
+          </a>
+          <a class="choose-card korea reveal" href="explore.html?country=korea" data-choose="korea">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/Bukchon_Hanok_Village_01.jpg/960px-Bukchon_Hanok_Village_01.jpg" alt="Traditional hanok houses in Bukchon, Seoul" loading="lazy">
+            <span class="inner">
+              <span class="for">for Mongolians &amp; everyone else</span>
+              <h3>Visit Korea</h3>
+              <p>Palaces and hanok alleys, Busan's beaches, Jeju's volcanoes and the best street food — with tips for getting around.</p>
+              <span class="go">Show me Korea <span data-icon="arrow-right"></span></span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top picks -->
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Top picks</span>
+            <h2>Don't miss in <span id="picks-country">Mongolia</span></h2>
+          </div>
+          <div class="scroller-nav">
+            <button type="button" id="picks-prev" aria-label="Scroll left"><span data-icon="chevron-left"></span></button>
+            <button type="button" id="picks-next" aria-label="Scroll right"><span data-icon="chevron-right"></span></button>
+          </div>
+        </div>
+        <div class="scroller" id="picks"></div>
+        <a class="link-arrow" href="explore.html" id="picks-all">See all places on the map <span data-icon="arrow-right"></span></a>
+      </div>
+    </section>
+
+    <!-- Food -->
+    <section class="section">
+      <div class="container food-grid">
+        <div class="food-intro reveal">
+          <span class="kicker">Eat like a local</span>
+          <h2 id="food-title">Two dishes you have to try</h2>
+          <p id="food-text"></p>
+          <a class="link-arrow" href="phrasebook.html#food">Learn how to order <span data-icon="arrow-right"></span></a>
+        </div>
+        <div id="food-cards" style="display: contents"></div>
+      </div>
+    </section>
+
+    <!-- Good to know -->
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="kicker">Good to know</span>
+            <h2>Korea vs Mongolia, side by side</h2>
+            <p>The basics you'll want before you land. Your destination is highlighted.</p>
+          </div>
+        </div>
+        <div class="compare reveal" role="table" aria-label="Korea and Mongolia compared">
+          <div class="compare-row compare-head" role="row">
+            <div class="label" role="columnheader"></div>
+            <div data-col="korea" role="columnheader"><span class="dot korea"></span>Korea</div>
+            <div data-col="mongolia" role="columnheader"><span class="dot mongolia"></span>Mongolia</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="label" role="rowheader"><span data-icon="landmark"></span>Capital</div>
+            <div data-col="korea" role="cell">Seoul</div>
+            <div data-col="mongolia" role="cell">Ulaanbaatar</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="label" role="rowheader"><span data-icon="banknote"></span>Money</div>
+            <div data-col="korea" role="cell">Korean won (₩ KRW). Cards work almost everywhere.</div>
+            <div data-col="mongolia" role="cell">Tögrög (₮ MNT). Cards in the city, cash in the countryside.</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="label" role="rowheader"><span data-icon="languages"></span>Language</div>
+            <div data-col="korea" role="cell">Korean, written in Hangul (한글)</div>
+            <div data-col="mongolia" role="cell">Mongolian, written in Cyrillic (Монгол)</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="label" role="rowheader"><span data-icon="clock"></span>Time zone</div>
+            <div data-col="korea" role="cell">UTC+9</div>
+            <div data-col="mongolia" role="cell">UTC+8 — one hour behind Seoul</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="label" role="rowheader"><span data-icon="users"></span>Population</div>
+            <div data-col="korea" role="cell">About 51 million</div>
+            <div data-col="mongolia" role="cell">About 3.5 million — and lots of horses</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="label" role="rowheader"><span data-icon="map"></span>Size</div>
+            <div data-col="korea" role="cell">About 100,000 km²</div>
+            <div data-col="mongolia" role="cell">About 1,564,000 km² — over 15× bigger</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="label" role="rowheader"><span data-icon="plug"></span>Plugs</div>
+            <div data-col="korea" role="cell">Type C / F, 220 V</div>
+            <div data-col="mongolia" role="cell">Type C / E, 230 V</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="label" role="rowheader"><span data-icon="phone"></span>Emergency</div>
+            <div data-col="korea" role="cell">112 police · 119 fire &amp; ambulance</div>
+            <div data-col="mongolia" role="cell">102 police · 101 fire · 103 ambulance</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="label" role="rowheader"><span data-icon="wallet"></span>Tipping</div>
+            <div data-col="korea" role="cell">Not expected</div>
+            <div data-col="mongolia" role="cell">Not expected, but rounding up is appreciated</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="label" role="rowheader"><span data-icon="compass"></span>Getting around</div>
+            <div data-col="korea" role="cell">Subway, buses and KTX trains. Get a T-money card.</div>
+            <div data-col="mongolia" role="cell">Taxis in the city; jeeps, minivans or domestic flights in the countryside</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tips from the team -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="kicker">From our team</span>
+            <h2>Tips we wish someone told us</h2>
+            <p>We're four students who travel between Seoul and Ulaanbaatar. Here's what we learned the hard way.</p>
+          </div>
+        </div>
+        <div class="tips-grid">
+          <figure class="tip-card reveal">
+            <blockquote class="note"><small>Getting around Korea</small>Download Naver Map or KakaoMap before you land. Google Maps is not much help for directions in Korea!</blockquote>
+            <figcaption class="tip-person">
+              <span class="avatar" style="background: var(--red)">MB</span>
+              <span><strong>Munkhbold Bilguun</strong><span>Team leader</span></span>
+            </figcaption>
+          </figure>
+          <figure class="tip-card reveal">
+            <blockquote class="note"><small>Money in Mongolia</small>Cards are fine in Ulaanbaatar, but outside the city it's cash only. Take tögrög before you leave UB.</blockquote>
+            <figcaption class="tip-person">
+              <span class="avatar" style="background: var(--blue)">MT</span>
+              <span><strong>Mashbat Temuulen</strong><span>JavaScript &amp; APIs</span></span>
+            </figcaption>
+          </figure>
+          <figure class="tip-card reveal">
+            <blockquote class="note"><small>Packing</small>Even in July, nights in the Gobi and at Khövsgöl get really cold. Bring a warm jacket. Trust me.</blockquote>
+            <figcaption class="tip-person">
+              <span class="avatar" style="background: var(--gold)">GB</span>
+              <span><strong>Gantulga Bolortsetseg</strong><span>UI / UX design</span></span>
+            </figcaption>
+          </figure>
+          <figure class="tip-card reveal">
+            <blockquote class="note"><small>Best festival</small>Go west to Bayan-Ölgii in early October for the Golden Eagle Festival. Nothing else like it.</blockquote>
+            <figcaption class="tip-person">
+              <span class="avatar" style="background: #16181d">KN</span>
+              <span><strong>Khali Nurjanat</strong><span>Content &amp; testing</span></span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to action -->
+    <section class="cta-band">
+      <img id="cta-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Kazakh-Mongolian_Eagle_Hunter.JPG/1280px-Kazakh-Mongolian_Eagle_Hunter.JPG" alt="" loading="lazy">
+      <div class="container">
+        <span class="kicker" style="color: var(--gold)">Before you fly</span>
+        <h2>Learn five phrases. Pass the culture quiz.</h2>
+        <p>Locals light up when you say thank you in their language — and knowing not to step on a ger's doorstep helps too.</p>
+        <div class="actions">
+          <a class="btn btn-light" href="phrasebook.html">Open the phrasebook</a>
+          <a class="btn btn-ghost" href="quiz.html">Take the quiz</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+  <noscript><p style="text-align:center;padding:16px">This site needs JavaScript for the map, live rates and quiz.</p></noscript>
+</body>
+</html>

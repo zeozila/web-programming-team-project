@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Explore places — SeoulBaatar</title>
+  <meta name="description" content="26 places in Korea and Mongolia on one map. Filter by country, interest and the best month to visit.">
+  <meta name="theme-color" content="#16181d">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/theme-init.js"></script>
+  <script src="vendor/leaflet/leaflet.js" defer></script>
+  <script type="module" src="js/pages/explore.js"></script>
+</head>
+<body class="has-hero">
+  <header class="site-header" id="site-header"></header>
+
+  <main id="main">
+    <section class="page-hero">
+      <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Gorkhi-Terelj_National_Park.jpg/1920px-Gorkhi-Terelj_National_Park.jpg" alt="" id="page-hero-photo">
+      <div class="container">
+        <span class="kicker">Explore</span>
+        <h1>Places worth the trip</h1>
+        <p>Palaces, deserts, volcanoes and night markets — filter by what you like, check the best month to go and save your favourites.</p>
+      </div>
+      <a class="photo-credit" id="page-hero-credit" href="https://commons.wikimedia.org/wiki/File:Gorkhi-Terelj_National_Park.jpg" target="_blank" rel="noopener">Photo: Chongkian, CC BY-SA 4.0</a>
+    </section>
+
+    <div class="explore-layout" id="explore-layout">
+      <section class="explore-list" aria-label="Places">
+        <div class="explore-tools">
+          <div class="tools-row">
+            <div class="seg" role="group" aria-label="Country" id="country-filter">
+              <button type="button" data-country="all" aria-pressed="false">All</button>
+              <button type="button" data-country="korea" aria-pressed="false">Korea</button>
+              <button type="button" data-country="mongolia" aria-pressed="false">Mongolia</button>
+            </div>
+            <label class="search-box">
+              <span class="sr-only">Search places</span>
+              <span data-icon="search"></span>
+              <input class="input" type="search" id="search" placeholder="Search: temple, beach, Gobi…" autocomplete="off">
+            </label>
+          </div>
+          <div class="tools-row">
+            <div class="chips" role="group" aria-label="Category" id="category-filter"></div>
+          </div>
+          <div class="tools-row">
+            <label class="sr-only" for="month-filter">Best month to visit</label>
+            <select class="input" id="month-filter">
+              <option value="0">Any month</option>
+            </select>
+            <button type="button" class="chip saved-toggle" id="saved-toggle" aria-pressed="false">
+              <span data-icon="heart"></span> Saved only
+            </button>
+          </div>
+        </div>
+        <p class="result-count" id="result-count" aria-live="polite"></p>
+        <div class="place-grid" id="place-grid"></div>
+      </section>
+
+      <aside class="explore-map" id="map-wrap" aria-label="Map">
+        <div id="map"></div>
+      </aside>
+    </div>
+
+    <button type="button" class="btn btn-primary map-toggle" id="map-toggle">
+      <span data-icon="map"></span> <span>Show map</span>
+    </button>
+
+    <dialog class="place-dialog" id="place-dialog" aria-labelledby="dialog-title"></dialog>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+  <noscript><p style="text-align:center;padding:16px">This page needs JavaScript to show the places and the map.</p></noscript>
+</body>
+</html>
