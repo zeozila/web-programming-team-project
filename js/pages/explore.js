@@ -194,7 +194,20 @@ function initMap() {
 
   updateMarkers();
   fitMap();
+
+  // On phones the map starts hidden (size 0), so re-fit it the first time it becomes visible
+  let wasHidden = document.getElementById("map").offsetWidth === 0;
+  new ResizeObserver(([entry]) => {
+    const hidden = entry.contentRect.width === 0;
+    if (wasHidden && !hidden) {
+      map.invalidateSize();
+      if (!flyingToPlace) fitMap();
+    }
+    wasHidden = hidden;
+  }).observe(document.getElementById("map"));
 }
+
+let flyingToPlace = false;
 
 function updateMarkers() {
   if (!map) return;
@@ -228,9 +241,13 @@ function showOnMap(id) {
   else document.getElementById("map-wrap").scrollIntoView({ behavior: "smooth", block: "nearest" });
   // make sure the marker is visible even if filters hid it
   markers.get(id).addTo(map);
+  flyingToPlace = true;
   map.invalidateSize();
   map.flyTo([place.lat, place.lng], 10, { duration: 1.2 });
-  map.once("moveend", () => markers.get(id).openPopup());
+  map.once("moveend", () => {
+    flyingToPlace = false;
+    markers.get(id).openPopup();
+  });
 }
 
 // mobile: full-screen map toggle
