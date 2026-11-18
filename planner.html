@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trip planner — SeoulBaatar</title>
+  <meta name="description" content="Currency converter, live weather, budget calculator and packing list for trips between Korea and Mongolia.">
+  <meta name="theme-color" content="#16181d">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/theme-init.js"></script>
+  <script type="module" src="js/pages/planner.js"></script>
+</head>
+<body class="has-hero">
+  <header class="site-header" id="site-header"></header>
+
+  <main id="main">
+    <section class="page-hero">
+      <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/SK_yurt_camp_%281_of_1%29-8.jpg/1920px-SK_yurt_camp_%281_of_1%29-8.jpg" alt="">
+      <div class="container">
+        <span class="kicker">Trip planner</span>
+        <h1>Get your trip ready</h1>
+        <p>Live exchange rates and weather, a rough budget, your packing list and the places you saved — all in one place.</p>
+      </div>
+      <a class="photo-credit" href="https://commons.wikimedia.org/wiki/File:SK_yurt_camp_(1_of_1)-8.jpg" target="_blank" rel="noopener">Photo: Myrzabek Ozubekov, CC BY-SA 4.0</a>
+    </section>
+
+    <section class="section tight">
+      <div class="container planner-grid">
+
+        <!-- Currency -->
+        <article class="panel span-5" aria-labelledby="money-title">
+          <div class="panel-head">
+            <span class="ic" data-icon="banknote"></span>
+            <div><h2 id="money-title">Currency converter</h2><p>Won, tögrög and US dollars</p></div>
+          </div>
+          <form class="converter" id="converter" autocomplete="off">
+            <div class="converter-row">
+              <label class="field"><span class="field-label">Amount</span>
+                <input class="input" type="number" id="amount" min="0" step="any" value="10000" inputmode="decimal">
+              </label>
+              <label class="field"><span class="field-label">From</span>
+                <select class="input" id="from"></select>
+              </label>
+            </div>
+            <button type="button" class="icon-btn swap-btn" id="swap" aria-label="Swap currencies"><span data-icon="arrow-left-right"></span></button>
+            <div class="converter-row">
+              <div class="converter-result" aria-live="polite">
+                <small>You get about</small>
+                <strong id="converted">…</strong>
+              </div>
+              <label class="field"><span class="field-label">To</span>
+                <select class="input" id="to"></select>
+              </label>
+            </div>
+            <div class="quick-amounts" id="quick-amounts"></div>
+            <p class="status-line" id="rate-status">Loading rates…</p>
+          </form>
+        </article>
+
+        <!-- Weather -->
+        <article class="panel span-7" aria-labelledby="weather-title">
+          <div class="panel-head">
+            <span class="ic" data-icon="cloud-sun"></span>
+            <div><h2 id="weather-title">Weather right now</h2><p>Live forecast from Open-Meteo</p></div>
+            <label style="margin-left:auto"><span class="sr-only">City</span>
+              <select class="input" id="city"></select>
+            </label>
+          </div>
+          <div id="weather" aria-live="polite"><p class="status-line">Loading weather…</p></div>
+        </article>
+
+        <!-- Budget -->
+        <article class="panel span-7" aria-labelledby="budget-title">
+          <div class="panel-head">
+            <span class="ic" data-icon="wallet"></span>
+            <div><h2 id="budget-title">Budget calculator</h2><p id="budget-sub">A rough idea of what your trip will cost</p></div>
+          </div>
+          <form class="budget-form" id="budget-form">
+            <label class="field"><span class="field-label">Days</span>
+              <input class="input" type="number" id="days" min="1" max="60" value="7">
+            </label>
+            <label class="field"><span class="field-label">Travellers</span>
+              <input class="input" type="number" id="people" min="1" max="20" value="2">
+            </label>
+            <label class="field"><span class="field-label">Travel style</span>
+              <select class="input" id="style">
+                <option value="budget">Backpacker</option>
+                <option value="comfort" selected>Comfortable</option>
+                <option value="luxury">Luxury</option>
+              </select>
+            </label>
+          </form>
+          <div id="budget-result"></div>
+          <p class="status-line" style="margin-top: 14px">Estimates per person per day, based on typical 2025–2026 prices. Real costs depend on season and where you go.</p>
+        </article>
+
+        <!-- Packing -->
+        <article class="panel span-5" aria-labelledby="pack-title">
+          <div class="panel-head">
+            <span class="ic" data-icon="backpack"></span>
+            <div><h2 id="pack-title">Packing list</h2><p id="pack-sub"></p></div>
+          </div>
+          <div class="progress" aria-hidden="true"><span id="pack-bar"></span></div>
+          <ul class="checklist" id="checklist"></ul>
+          <form class="add-item" id="add-item">
+            <label class="sr-only" for="new-item">New item</label>
+            <input class="input" id="new-item" placeholder="Add something…" maxlength="60">
+            <button class="btn btn-primary btn-sm" type="submit"><span data-icon="plus"></span> Add</button>
+          </form>
+          <button type="button" class="btn btn-outline btn-sm" id="pack-reset" style="margin-top: 12px"><span data-icon="rotate-ccw"></span> Reset list</button>
+        </article>
+
+        <!-- Saved places -->
+        <article class="panel span-12" id="my-trip" aria-labelledby="trip-title">
+          <div class="panel-head">
+            <span class="ic" data-icon="heart"></span>
+            <div><h2 id="trip-title">My trip</h2><p id="trip-sub">Places you saved on the Explore page</p></div>
+            <button type="button" class="btn btn-outline btn-sm no-print" id="print-trip" style="margin-left:auto"><span data-icon="printer"></span> Print</button>
+          </div>
+          <div id="trip-list"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+  <noscript><p style="text-align:center;padding:16px">This page needs JavaScript for the converter, weather and lists.</p></noscript>
+</body>
+</html>

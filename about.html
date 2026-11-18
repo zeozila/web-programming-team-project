@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About the project — SeoulBaatar</title>
+  <meta name="description" content="SeoulBaatar is a Web Programming team project by Team 6. Meet the team, see how it was built and find the photo credits.">
+  <meta name="theme-color" content="#16181d">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/theme-init.js"></script>
+  <script type="module" src="js/pages/about.js"></script>
+</head>
+<body class="has-hero">
+  <header class="site-header" id="site-header"></header>
+
+  <main id="main">
+    <section class="page-hero">
+      <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Cheonggyecheon_stream_at_sunrise_with_trees_in_Seoul.jpg/1920px-Cheonggyecheon_stream_at_sunrise_with_trees_in_Seoul.jpg" alt="">
+      <div class="container">
+        <span class="kicker">About</span>
+        <h1>Made by Team 6</h1>
+        <p>A Web Programming team project — and the guide we wanted when we first moved between Ulaanbaatar and Seoul.</p>
+      </div>
+      <a class="photo-credit" href="https://commons.wikimedia.org/wiki/File:Cheonggyecheon_stream_at_sunrise_with_trees_in_Seoul.jpg" target="_blank" rel="noopener">Photo: Basile Morin, CC BY-SA 4.0</a>
+    </section>
+
+    <section class="section">
+      <div class="container about-intro">
+        <div class="reveal">
+          <span class="kicker">The idea</span>
+          <h2>One website, two directions</h2>
+          <p class="lead">Most travel guides are written for Western tourists. When we travel between Korea and Mongolia, we end up juggling blogs, a translator, a currency app and a weather app.</p>
+          <p>SeoulBaatar puts all of it in one place and works both ways: choose <strong>Korea</strong> or <strong>Mongolia</strong> at the top and the places, phrases, money, weather and quiz all switch to that country. The name mixes <em>Seoul</em> and <em>Ulaanbaatar</em> — and <em>baatar</em> means "hero" in Mongolian.</p>
+        </div>
+        <div class="about-photo reveal">
+          <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/UB_downtown.jpg/960px-UB_downtown.jpg" alt="Downtown Ulaanbaatar" loading="lazy">
+          <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Seoul_%28175734251%29.jpeg/960px-Seoul_%28175734251%29.jpeg" alt="Seoul at night" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="team">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="kicker">The team</span>
+            <h2>Team 6</h2>
+            <p>Web Programming, 2026. Everyone wrote code — these are the parts each of us led.</p>
+          </div>
+        </div>
+        <div class="team-grid">
+          <article class="member reveal">
+            <span class="avatar" style="background: var(--red)">MB</span>
+            <h3>Munkhbold Bilguun</h3>
+            <span class="id">202537630</span>
+            <span class="role">Team leader · Frontend</span>
+            <ul>
+              <li>Page layout and navigation</li>
+              <li>GitHub repo and deployment</li>
+              <li>Merging everyone's work</li>
+            </ul>
+          </article>
+          <article class="member reveal">
+            <span class="avatar" style="background: var(--blue)">MT</span>
+            <h3>Mashbat Temuulen</h3>
+            <span class="id">202537735</span>
+            <span class="role">JavaScript &amp; APIs</span>
+            <ul>
+              <li>Map, weather and currency</li>
+              <li>Filters and search</li>
+              <li>Saving data in the browser</li>
+            </ul>
+          </article>
+          <article class="member reveal">
+            <span class="avatar" style="background: var(--gold)">GB</span>
+            <h3>Gantulga Bolortsetseg</h3>
+            <span class="id">202637491</span>
+            <span class="role">UI / UX design</span>
+            <ul>
+              <li>Design, colours and fonts</li>
+              <li>Mobile layout</li>
+              <li>Dark mode</li>
+            </ul>
+          </article>
+          <article class="member reveal">
+            <span class="avatar" style="background: #16181d">KN</span>
+            <h3>Khali Nurjanat</h3>
+            <span class="id">202537452</span>
+            <span class="role">Content &amp; testing</span>
+            <ul>
+              <li>Places, phrases and quiz</li>
+              <li>Testing and bug fixing</li>
+              <li>Presentation</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="kicker">What's inside</span>
+            <h2>Features</h2>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <div class="feature reveal"><span data-icon="arrow-left-right"></span><h3>Two-way destination switch</h3><p>Pick Korea or Mongolia and every page adapts: photos, places, language order, currency and weather.</p></div>
+          <div class="feature reveal"><span data-icon="map"></span><h3>Interactive map</h3><p>26 places on a Leaflet map. Filter by country, interest or month and the pins update live.</p></div>
+          <div class="feature reveal"><span data-icon="languages"></span><h3>Phrasebook + flashcards</h3><p>41 phrases in Korean and Mongolian with romanization, audio and a flashcard trainer.</p></div>
+          <div class="feature reveal"><span data-icon="banknote"></span><h3>Live money &amp; weather</h3><p>Real exchange rates and a 5-day forecast from free public APIs.</p></div>
+          <div class="feature reveal"><span data-icon="list-checks"></span><h3>Trip planner</h3><p>Budget calculator, packing checklist and saved places — all remembered in your browser.</p></div>
+          <div class="feature reveal"><span data-icon="trophy"></span><h3>Culture quiz</h3><p>Ten questions on manners, with explanations and your best score saved.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="kicker">How we built it</span>
+            <h2>Tech stack</h2>
+            <p>No frameworks and no backend — just the things we learned in class, plus a map library.</p>
+          </div>
+        </div>
+        <div class="stack-list reveal">
+          <span>HTML5</span><span>CSS3 (Grid, Flexbox, custom properties)</span><span>JavaScript ES modules</span>
+          <span>Leaflet.js + OpenStreetMap</span><span>Open-Meteo API</span><span>ExchangeRate-API</span>
+          <span>Web Speech API</span><span>localStorage</span><span>&lt;dialog&gt; element</span><span>GitHub Pages</span>
+        </div>
+        <div class="files-grid" style="margin-top: 40px">
+          <a class="file-link" id="repo-link" href="#" target="_blank" rel="noopener"><span data-icon="code"></span><div><strong>Source code</strong><span>GitHub repository</span></div></a>
+          <a class="file-link" href="docs/proposal.pdf" target="_blank" rel="noopener"><span data-icon="book-open"></span><div><strong>Project proposal</strong><span>PDF</span></div></a>
+          <a class="file-link" id="readme-link" href="#" target="_blank" rel="noopener"><span data-icon="info"></span><div><strong>README</strong><span>How to run it, folder structure</span></div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="credits">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Credits</span>
+            <h2>Photos &amp; data</h2>
+            <p>All photos are from Wikimedia Commons and are used under their free licences. Click a name to see the original.</p>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table class="credits-table">
+            <thead><tr><th>Photo</th><th>Shows</th><th>Author</th><th>Licence</th></tr></thead>
+            <tbody id="credits-body"></tbody>
+          </table>
+        </div>
+        <p class="status-line" style="margin-top: 20px">
+          Map data © OpenStreetMap contributors, tiles by CARTO · Weather by Open-Meteo.com (CC BY 4.0) · Rates by ExchangeRate-API · Icons by Lucide · Fonts: Onest, Archivo and Caveat (SIL Open Font License).
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

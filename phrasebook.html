@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phrasebook — SeoulBaatar</title>
+  <meta name="description" content="Useful Korean and Mongolian phrases with romanization, audio and flashcards.">
+  <meta name="theme-color" content="#16181d">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/theme-init.js"></script>
+  <script type="module" src="js/pages/phrasebook.js"></script>
+</head>
+<body class="has-hero">
+  <header class="site-header" id="site-header"></header>
+
+  <main id="main">
+    <section class="page-hero">
+      <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Korea-Seoul-Gwangjang_Market-01.jpg/1280px-Korea-Seoul-Gwangjang_Market-01.jpg" alt="">
+      <div class="container">
+        <span class="kicker">Phrasebook</span>
+        <h1>Say it like a local</h1>
+        <p>Korean and Mongolian side by side, with easy pronunciation, audio and flashcards. A little effort goes a long way.</p>
+      </div>
+      <a class="photo-credit" href="https://commons.wikimedia.org/wiki/File:Korea-Seoul-Gwangjang_Market-01.jpg" target="_blank" rel="noopener">Photo: ayustety, CC BY-SA 2.0</a>
+    </section>
+
+    <section class="section tight">
+      <div class="container">
+        <div class="phrase-tools">
+          <div class="seg" role="tablist" aria-label="Phrase topics" id="group-tabs"></div>
+          <label class="search-box">
+            <span class="sr-only">Search phrases</span>
+            <span data-icon="search"></span>
+            <input class="input" type="search" id="phrase-search" placeholder="Search in any language…" autocomplete="off">
+          </label>
+        </div>
+        <p class="result-count" id="phrase-hint"></p>
+        <div class="phrase-grid" id="phrase-grid"></div>
+      </div>
+    </section>
+
+    <section class="section alt" id="practice">
+      <div class="container practice">
+        <div>
+          <span class="kicker">Practice</span>
+          <h2>Flashcards</h2>
+          <p>See the English, try to remember the <span id="practice-lang">Mongolian</span>, then flip the card. Phrases you mark as learned are saved in your browser.</p>
+          <div class="progress" aria-hidden="true"><span id="practice-bar" style="width: 0%"></span></div>
+          <p class="status-line" style="margin-top: 8px" id="practice-count"></p>
+          <button type="button" class="btn btn-outline btn-sm" id="practice-reset"><span data-icon="rotate-ccw"></span> Start over</button>
+        </div>
+        <div>
+          <button type="button" class="flashcard" id="flashcard" aria-live="polite">
+            <span class="flashcard-inner">
+              <span class="flashcard-face front"><small>English</small><span class="big" id="card-front"></span><span class="rom">Tap to flip</span></span>
+              <span class="flashcard-face back"><small id="card-back-label"></small><span class="big" id="card-back"></span><span class="rom" id="card-back-rom"></span></span>
+            </span>
+          </button>
+          <div class="practice-actions">
+            <button type="button" class="btn btn-outline" id="card-again"><span data-icon="shuffle"></span> Next card</button>
+            <button type="button" class="btn btn-outline" id="card-listen"><span data-icon="volume-2"></span> Listen</button>
+            <button type="button" class="btn btn-primary" id="card-known"><span data-icon="check"></span> I know this</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+  <noscript><p style="text-align:center;padding:16px">This page needs JavaScript to show the phrases.</p></noscript>
+</body>
+</html>
