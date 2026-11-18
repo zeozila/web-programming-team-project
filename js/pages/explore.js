@@ -255,7 +255,12 @@ const mapToggle = document.getElementById("map-toggle");
 function setMapOpen(open) {
   document.body.classList.toggle("map-open", open);
   mapToggle.innerHTML = `${icon(open ? "layers" : "map")} <span>${open ? "Show list" : "Show map"}</span>`;
-  if (map) setTimeout(() => map.invalidateSize(), 50);
+  if (map && open) {
+    setTimeout(() => {
+      map.invalidateSize();
+      if (!flyingToPlace) fitMap();
+    }, 50);
+  }
 }
 mapToggle.addEventListener("click", () => setMapOpen(!document.body.classList.contains("map-open")));
 
