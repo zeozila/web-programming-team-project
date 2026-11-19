@@ -4,6 +4,8 @@ import { getRates, convert, getWeather, describeWeather } from "../lib/api.js";
 import { load, save, getFavorites, toggleFavorite } from "../lib/store.js";
 import { PLACES, findPlace } from "../data/places.js";
 import { photoUrl } from "../data/photos.js";
+import { DAILY_COST } from "../data/costs.js";
+import { TRIPS } from "../data/trips.js";
 
 initPage("planner");
 
@@ -134,19 +136,6 @@ citySelect.addEventListener("change", loadWeather);
 
 // ============ Budget ============
 
-// Rough daily cost per person in local currency.
-const DAILY_COST = {
-  korea: {
-    budget: { Sleep: 35000, Food: 30000, Transport: 10000, Activities: 15000 },
-    comfort: { Sleep: 110000, Food: 60000, Transport: 20000, Activities: 35000 },
-    luxury: { Sleep: 300000, Food: 150000, Transport: 60000, Activities: 90000 },
-  },
-  mongolia: {
-    budget: { Sleep: 50000, Food: 40000, Transport: 25000, Activities: 30000 },
-    comfort: { Sleep: 150000, Food: 80000, Transport: 80000, Activities: 80000 },
-    luxury: { Sleep: 450000, Food: 180000, Transport: 250000, Activities: 200000 },
-  },
-};
 
 function renderBudget() {
   const dest = getDestination();
@@ -270,19 +259,39 @@ document.getElementById("pack-reset").addEventListener("click", () => {
 
 // ============ My trip ============
 
+function savedTripsHtml() {
+  const ids = load("savedTrips", []);
+  const trips = TRIPS.filter((t) => ids.includes(t.id));
+  if (!trips.length) return "";
+  return `<span class="field-label">Saved trip plans</span><div class="trip-list" style="margin:10px 0 24px">${trips
+    .map(
+      (t) => `
+      <div class="trip-item">
+        <img src="${photoUrl(t.photo, 330)}" alt="" loading="lazy">
+        <div>
+          <a href="trip.html?id=${t.id}"><strong>${escapeHtml(t.name)}</strong></a>
+          <span>${t.days} days · ${COUNTRY[t.country].name}</span>
+        </div>
+        <button type="button" class="icon-btn no-print" data-unsave-trip="${t.id}" aria-label="Remove ${escapeHtml(t.name)}">${icon("x")}</button>
+      </div>`
+    )
+    .join("")}</div><span class="field-label">Saved places</span>`;
+}
+
 function renderTrip() {
   const saved = getFavorites().map(findPlace).filter(Boolean);
+  const tripsPart = savedTripsHtml();
   const box = document.getElementById("trip-list");
   document.getElementById("trip-sub").textContent = saved.length
     ? `${saved.length} saved ${saved.length === 1 ? "place" : "places"}`
     : "Places you saved on the Explore page";
-  document.getElementById("print-trip").hidden = saved.length === 0;
+  document.getElementById("print-trip").hidden = saved.length === 0 && !tripsPart;
 
   if (!saved.length) {
     const ideas = PLACES.filter((p) => p.country === getDestination()).slice(0, 3);
-    box.innerHTML = `
+    box.innerHTML = `${tripsPart}
       <div class="empty-state">
-        <span class="hand">Nothing saved yet</span>
+        <span class="hand">No places saved yet</span>
         <p>Tap the ♥ on any place to build your trip. Maybe start with ${ideas
           .map((p) => `<a href="explore.html#place=${p.id}">${escapeHtml(p.name)}</a>`)
           .join(", ")}?</p>
@@ -290,7 +299,7 @@ function renderTrip() {
       </div>`;
     return;
   }
-  box.innerHTML = `<div class="trip-list">${saved
+  box.innerHTML = `${tripsPart}<div class="trip-list" style="margin-top:10px">${saved
     .map(
       (p) => `
       <div class="trip-item">
@@ -306,6 +315,13 @@ function renderTrip() {
 }
 
 document.getElementById("trip-list").addEventListener("click", (event) => {
+  const tripBtn = event.target.closest("[data-unsave-trip]");
+  if (tripBtn) {
+    save("savedTrips", load("savedTrips", []).filter((id) => id !== tripBtn.dataset.unsaveTrip));
+    renderTrip();
+    toast("Trip removed");
+    return;
+  }
   const btn = event.target.closest("[data-unsave]");
   if (!btn) return;
   toggleFavorite(btn.dataset.unsave);

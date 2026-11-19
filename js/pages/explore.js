@@ -1,6 +1,7 @@
 import { initPage, getDestination, toast, escapeHtml, MONTHS, COUNTRY } from "../lib/app.js";
 import { icon } from "../lib/icons.js";
 import { PLACES, CATEGORIES, findPlace } from "../data/places.js";
+import { tripsWithPlace } from "../data/trips.js";
 import { photoUrl, getPhoto } from "../data/photos.js";
 import { placeCard, bindFavButtons, handleBrokenImages } from "../lib/cards.js";
 import { getFavorites, isFavorite, toggleFavorite } from "../lib/store.js";
@@ -319,6 +320,14 @@ function openPlace(id) {
         </dl>
         <span class="field-label">Best time to visit</span>
         <div class="months" aria-label="Best months">${monthsStrip(place.best)}</div>
+        ${(() => {
+          const trips = tripsWithPlace(place.id);
+          return trips.length
+            ? `<div class="in-trips"><span class="field-label">Part of these trip plans</span><div class="chips">${trips
+                .map((t) => `<a class="chip" href="trip.html?id=${t.id}">${icon("compass")} ${escapeHtml(t.name)} · ${t.days} days</a>`)
+                .join("")}</div></div>`
+            : "";
+        })()}
         <div class="dialog-actions">
           <button type="button" class="btn btn-primary btn-sm" data-dialog-fav aria-pressed="${saved}">
             ${icon("heart")} <span>${saved ? "Saved to my trip" : "Save to my trip"}</span>

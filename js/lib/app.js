@@ -4,8 +4,8 @@ import { icon } from "./icons.js";
 import { load, save, getFavorites } from "./store.js";
 
 const NAV = [
-  { href: "index.html", label: "Home", key: "home" },
   { href: "explore.html", label: "Explore", key: "explore" },
+  { href: "trips.html", label: "Trips", key: "trips" },
   { href: "phrasebook.html", label: "Phrasebook", key: "phrasebook" },
   { href: "planner.html", label: "Planner", key: "planner" },
   { href: "quiz.html", label: "Quiz", key: "quiz" },
@@ -112,6 +112,7 @@ function footerHtml() {
         <a href="explore.html?country=korea">Places in Korea</a>
         <a href="explore.html?country=mongolia">Places in Mongolia</a>
         <a href="explore.html#map">Map</a>
+        <a href="trips.html">Trip plans</a>
       </div>
       <div>
         <h3>Travel tools</h3>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trip plans — SeoulBaatar</title>
+  <meta name="description" content="Day-by-day trip plans for Korea and Mongolia with route maps, cost estimates and traveller reviews.">
+  <meta name="theme-color" content="#16181d">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/theme-init.js"></script>
+  <script type="module" src="js/pages/trips.js"></script>
+</head>
+<body class="has-hero">
+  <header class="site-header" id="site-header"></header>
+
+  <main id="main">
+    <section class="page-hero">
+      <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Khongoryn_Els_04.jpg/1920px-Khongoryn_Els_04.jpg" alt="">
+      <div class="container">
+        <span class="kicker">Trip plans</span>
+        <h1>Ready-made trips, day by day</h1>
+        <p>Nine routes we'd recommend to a friend — from a weekend in Ulaanbaatar to a week across Korea. Each one has a map, a day-by-day plan, a cost estimate and reviews.</p>
+      </div>
+      <a class="photo-credit" href="https://commons.wikimedia.org/wiki/File:Khongoryn_Els_04.jpg" target="_blank" rel="noopener">Photo: Bernard Gagnon, CC0</a>
+    </section>
+
+    <section class="section tight">
+      <div class="container">
+        <div class="explore-tools">
+          <div class="tools-row">
+            <div class="seg" role="group" aria-label="Country" id="trip-country">
+              <button type="button" data-country="all" aria-pressed="false">All</button>
+              <button type="button" data-country="korea" aria-pressed="false">Korea</button>
+              <button type="button" data-country="mongolia" aria-pressed="false">Mongolia</button>
+            </div>
+            <div class="chips" role="group" aria-label="Trip length" id="trip-length">
+              <button type="button" class="chip" data-length="any" aria-pressed="true">Any length</button>
+              <button type="button" class="chip" data-length="short" aria-pressed="false">Up to 3 days</button>
+              <button type="button" class="chip" data-length="mid" aria-pressed="false">4–5 days</button>
+              <button type="button" class="chip" data-length="long" aria-pressed="false">6+ days</button>
+            </div>
+          </div>
+        </div>
+        <p class="result-count" id="trip-count" aria-live="polite"></p>
+        <div class="trip-grid" id="trip-grid"></div>
+        <p class="status-line" style="margin-top: 28px">Costs are our estimate per person, from backpacker to comfortable style, including transport between stops but not flights to the country. We don't sell tours — these are plans you can follow on your own.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+  <noscript><p style="text-align:center;padding:16px">This page needs JavaScript to show the trips.</p></noscript>
+</body>
+</html>

@@ -1,7 +1,9 @@
 import { initPage, getDestination, setDestination, COUNTRY, escapeHtml, formatNumber } from "../lib/app.js";
 import { photoUrl, getPhoto } from "../data/photos.js";
 import { PLACES } from "../data/places.js";
-import { placeCard, bindFavButtons, handleBrokenImages } from "../lib/cards.js";
+import { placeCard, tripCard, bindFavButtons, handleBrokenImages } from "../lib/cards.js";
+import { TRIPS } from "../data/trips.js";
+import { getRatingSummary } from "../lib/reviews.js";
 import { getRates } from "../lib/api.js";
 
 initPage("home");
@@ -159,6 +161,24 @@ function scrollPicks(direction) {
 document.getElementById("picks-prev").addEventListener("click", () => scrollPicks(-1));
 document.getElementById("picks-next").addEventListener("click", () => scrollPicks(1));
 
+// ---------- trip plans ----------
+
+let ratings = {};
+function renderTrips(dest) {
+  document.getElementById("trips-country").textContent = COUNTRY[dest].name;
+  document.getElementById("trips-all").href = `trips.html?country=${dest}`;
+  document.getElementById("home-trips").innerHTML = TRIPS.filter((trip) => trip.country === dest)
+    .slice(0, 3)
+    .map((trip) => tripCard(trip, ratings[trip.id]))
+    .join("");
+}
+getRatingSummary()
+  .then((summary) => {
+    ratings = summary;
+    renderTrips(getDestination());
+  })
+  .catch(() => {});
+
 // ---------- food ----------
 
 function renderFood(dest) {
@@ -186,6 +206,7 @@ function renderAll() {
   const dest = getDestination();
   renderHero(dest);
   renderPicks(dest);
+  renderTrips(dest);
   renderFood(dest);
   renderRate(dest);
   document.getElementById("cta-photo").src = photoUrl(HERO[dest].cta, 1280);
