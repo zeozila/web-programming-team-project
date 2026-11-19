@@ -109,11 +109,8 @@
               <label class="field"><span class="field-label">Your review</span>
                 <textarea class="input" name="comment" rows="4" maxlength="600" required placeholder="What did you like? Any tips for others?"></textarea>
               </label>
-              <!-- hidden from people; bots tend to fill it in -->
-              <input class="sr-only" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
               <p class="form-error" id="review-error" role="alert" hidden></p>
               <button class="btn btn-primary" type="submit" id="review-submit">Post review</button>
-              <p class="status-line" id="review-mode"></p>
             </form>
           </div>
           <div class="review-list" id="review-list" aria-live="polite"></div>

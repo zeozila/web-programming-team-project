@@ -11,7 +11,7 @@ const state = {
   country: ["korea", "mongolia", "all"].includes(params.get("country")) ? params.get("country") : getDestination(),
   length: "any",
 };
-let ratings = {};
+const ratings = getRatingSummary();
 
 const grid = document.getElementById("trip-grid");
 
@@ -53,10 +53,3 @@ document.addEventListener("destinationchange", (event) => {
 
 render();
 
-// ratings arrive a moment later; the cards are redrawn when they do
-getRatingSummary()
-  .then((summary) => {
-    ratings = summary;
-    render();
-  })
-  .catch(() => {});

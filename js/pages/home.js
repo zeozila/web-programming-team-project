@@ -163,7 +163,7 @@ document.getElementById("picks-next").addEventListener("click", () => scrollPick
 
 // ---------- trip plans ----------
 
-let ratings = {};
+const ratings = getRatingSummary();
 function renderTrips(dest) {
   document.getElementById("trips-country").textContent = COUNTRY[dest].name;
   document.getElementById("trips-all").href = `trips.html?country=${dest}`;
@@ -172,12 +172,6 @@ function renderTrips(dest) {
     .map((trip) => tripCard(trip, ratings[trip.id]))
     .join("");
 }
-getRatingSummary()
-  .then((summary) => {
-    ratings = summary;
-    renderTrips(getDestination());
-  })
-  .catch(() => {});
 
 // ---------- food ----------
 

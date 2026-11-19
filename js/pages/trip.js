@@ -6,7 +6,7 @@ import { photoUrl, getPhoto } from "../data/photos.js";
 import { DAILY_COST, dailyTotal } from "../data/costs.js";
 import { tripCard, bestMonthsText, starsHtml, handleBrokenImages } from "../lib/cards.js";
 import { getRates, convert } from "../lib/api.js";
-import { getReviews, addReview, getRatingSummary, isShared } from "../lib/reviews.js";
+import { getReviews, addReview, getRatingSummary } from "../lib/reviews.js";
 import { load, save } from "../lib/store.js";
 
 initPage("trips");
@@ -75,7 +75,6 @@ function renderTrip() {
   ).join("");
 
   renderPriceCard(null);
-  renderMoreTrips({});
   initRouteMap();
   setupTabs();
   setupReviews();
@@ -84,9 +83,7 @@ function renderTrip() {
     renderPriceCard(rates);
     renderCost(rates);
   });
-  getRatingSummary()
-    .then((summary) => renderMoreTrips(summary))
-    .catch(() => {});
+  renderMoreTrips(getRatingSummary());
 }
 
 function renderDays() {
@@ -329,23 +326,15 @@ function renderReviews(list) {
     : `<div class="empty-state"><span class="hand">Be the first!</span><p>Have you done this trip, or part of it? Tell other travellers how it went.</p></div>`;
 }
 
-async function loadReviews() {
-  try {
-    renderReviews(await getReviews(trip.id));
-  } catch {
-    document.getElementById("review-list").innerHTML = `<p class="status-line">Couldn't load reviews right now. Please try again later.</p>`;
-  }
+function loadReviews() {
+  renderReviews(getReviews(trip.id));
 }
 
 function setupReviews() {
   const form = document.getElementById("review-form");
   const error = document.getElementById("review-error");
-  const submit = document.getElementById("review-submit");
-  document.getElementById("review-mode").textContent = isShared
-    ? "Your review is public and everyone can see it."
-    : "Reviews are saved in this browser for now.";
 
-  form.addEventListener("submit", async (event) => {
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new FormData(form);
     const rating = Number(data.get("rating"));
@@ -358,29 +347,14 @@ function setupReviews() {
     };
     error.hidden = true;
 
-    if (data.get("website")) return; // a bot filled the hidden field
     if (!rating) return showError("Please choose a star rating.");
     if (!name) return showError("Please tell us your name.");
     if (comment.length < 10) return showError("Please write at least a short sentence (10+ characters).");
 
-    // one review a minute per browser, to slow down spam
-    const last = load("lastReviewAt", 0);
-    if (Date.now() - last < 60000) return showError("Thanks! Please wait a minute before posting another review.");
-
-    submit.disabled = true;
-    submit.textContent = "Posting…";
-    try {
-      await addReview({ tripId: trip.id, name, rating, comment });
-      save("lastReviewAt", Date.now());
-      form.reset();
-      toast("Thanks for your review!");
-      await loadReviews();
-    } catch {
-      showError("Sorry, your review couldn't be posted. Check your internet and try again.");
-    } finally {
-      submit.disabled = false;
-      submit.textContent = "Post review";
-    }
+    addReview({ tripId: trip.id, name, rating, comment });
+    form.reset();
+    toast("Thanks for your review!");
+    loadReviews();
   });
 
   loadReviews();
