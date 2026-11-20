@@ -72,7 +72,6 @@ document.getElementById("quick-amounts").addEventListener("click", (event) => {
   amountInput.value = btn.dataset.amount;
   renderConversion();
 });
-document.getElementById("converter").addEventListener("submit", (event) => event.preventDefault());
 
 // ============ Weather ============
 
@@ -170,7 +169,6 @@ function renderBudget() {
     </div>`;
 }
 document.getElementById("budget-form").addEventListener("input", renderBudget);
-document.getElementById("budget-form").addEventListener("submit", (event) => event.preventDefault());
 
 // ============ Packing list ============
 

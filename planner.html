@@ -36,7 +36,7 @@
             <span class="ic" data-icon="banknote"></span>
             <div><h2 id="money-title">Currency converter</h2><p>Won, tögrög and US dollars</p></div>
           </div>
-          <form class="converter" id="converter" autocomplete="off">
+          <div class="converter" id="converter">
             <div class="converter-row">
               <label class="field"><span class="field-label">Amount</span>
                 <input class="input" type="number" id="amount" min="0" step="any" value="10000" inputmode="decimal">
@@ -57,7 +57,7 @@
             </div>
             <div class="quick-amounts" id="quick-amounts"></div>
             <p class="status-line" id="rate-status">Loading rates…</p>
-          </form>
+          </div>
         </article>
 
         <!-- Weather -->
@@ -78,7 +78,7 @@
             <span class="ic" data-icon="wallet"></span>
             <div><h2 id="budget-title">Budget calculator</h2><p id="budget-sub">A rough idea of what your trip will cost</p></div>
           </div>
-          <form class="budget-form" id="budget-form">
+          <div class="budget-form" id="budget-form">
             <label class="field"><span class="field-label">Days</span>
               <input class="input" type="number" id="days" min="1" max="60" value="7">
             </label>
@@ -92,7 +92,7 @@
                 <option value="luxury">Luxury</option>
               </select>
             </label>
-          </form>
+          </div>
           <div id="budget-result"></div>
           <p class="status-line" style="margin-top: 14px">Estimates per person per day, based on typical 2025–2026 prices. Real costs depend on season and where you go.</p>
         </article>
@@ -107,7 +107,7 @@
           <ul class="checklist" id="checklist"></ul>
           <form class="add-item" id="add-item">
             <label class="sr-only" for="new-item">New item</label>
-            <input class="input" id="new-item" placeholder="Add something…" maxlength="60">
+            <input class="input" type="text" id="new-item" placeholder="Add something…" maxlength="60">
             <button class="btn btn-primary btn-sm" type="submit"><span data-icon="plus"></span> Add</button>
           </form>
           <button type="button" class="btn btn-outline btn-sm" id="pack-reset" style="margin-top: 12px"><span data-icon="rotate-ccw"></span> Reset list</button>

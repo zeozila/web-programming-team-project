@@ -9,7 +9,7 @@
     var dest = JSON.parse(localStorage.getItem("sb.destination"));
     root.dataset.theme = theme;
     root.dataset.dest = dest === "korea" ? "korea" : "mongolia";
-  } catch (e) {
+  } catch {
     root.dataset.theme = "light";
     root.dataset.dest = "mongolia";
   }
