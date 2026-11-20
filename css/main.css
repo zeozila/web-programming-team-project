@@ -2631,6 +2631,14 @@ select.input {
 #route-map {
   height: 340px;
 }
+/* Leaflet uses z-index up to 1000 inside the map; keep that inside the map box
+   so the map can't cover the sticky header or the tabs bar when scrolling */
+#map,
+#route-map {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
 .route-pin {
   width: 28px;
   height: 28px;
